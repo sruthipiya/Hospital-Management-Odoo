@@ -1,0 +1,30 @@
+<odoo>
+    <record model="ir.module.category" id="hospital_module_management">
+        <field name="name">Hospital</field>
+        <field name="description">User access level for Hospital Management
+            module
+        </field>
+        <field name="sequence">20</field>
+    </record>
+    <record id="hospital_receptionist" model="res.groups">
+        <field name="name">Receptionist</field>
+        <field name="category_id" ref="hospital_module_management"/>
+    </record>
+    <record id="hospital_doctor" model="res.groups">
+        <field name="name">Doctor</field>
+        <field name="category_id" ref="hospital_module_management"/>
+<!--        <field name="implied_ids" eval="[(4, ref('hospital_receptionist'))]"/>-->
+    </record>
+    <record id="own_partner" model="ir.rule">
+        <field name="name">Own Documents</field>
+        <field name="model_id" ref="model_doctor_appointment"/>
+        <field name="groups" eval="[(4, ref('hospital_doctor'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+        <field name="domain_force">
+            [('appointment_doctor_id','=',user.partner_id.id)]
+        </field>
+    </record>
+</odoo>

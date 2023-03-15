@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="online_create_patient_form">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure oe_empty text-center">
+                <section class="s_website_form text-center" data-vcss="001"
+                         data-snippet="s_website_form">
+                    <div class="container"
+                         style="background-image: url('https://mobdev.app/wp-content/themes/mobdev/images/doctor-booking-app.jpg'); height: 400px; width:1000px; background-repeat: no-repeat; ">
+                    </div>
+                    <div class="card mx-4 mx-md-5 shadow-5-strong"
+                         style="margin-top: -100px; background: hsla(0, 0%, 100%, 0.8); backdrop-filter: blur(30px);">
+                        <div class="card-body py-5 px-md-5">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-lg-8">
+                                    <h2 class="fw-bold mb-5">Create Card</h2>
+                                    <form action="/appointment/created/"
+                                          method="post"
+                                          enctype="multipart/form-data"
+                                          class="o_mark_required"
+                                          data-mark="*">
+                                        <div class="form-outline mb-4">
+                                            <input id="form3Example3"
+                                                   type="hidden"
+                                                   name="csrf_token"
+                                                   t-att-value="request.csrf_token()"
+                                                   class="form-control"/>
+
+                                            <label class="form-label"
+                                                   for="form3Example3">
+                                                Name*
+                                            </label>
+                                            <div class="col-sm">
+                                                <input id="name"
+                                                       type="text"
+                                                       class="form-control s_website_form_input"
+                                                       name="name"
+                                                       required="1"/>
+                                            </div>
+
+                                            <label class="form-label"
+                                                   for="form3Example3">
+                                                Gender*
+                                            </label>
+                                            <div class="col-sm">
+                                                <select name="gender"
+                                                        t-attf-class="form-control s_website_form_input">
+                                                    <option value="male">
+                                                        Male
+                                                    </option>
+                                                    <option value="female">
+                                                        Female
+                                                    </option>
+                                                    <option value="other">
+                                                        Other
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <label class="form-label"
+                                                   for="form3Example3">
+                                                Blood Group*
+                                            </label>
+                                            <div class="col-sm">
+                                                <select name="blood_group"
+                                                        t-attf-class="form-control s_website_form_input">
+                                                    <option value="A">
+                                                        A
+                                                    </option>
+                                                    <option value="A+">
+                                                        A+
+                                                    </option>
+                                                    <option value="B">
+                                                        B
+                                                    </option>
+                                                    <option value="B+">
+                                                        B+
+                                                    </option>
+                                                    <option value="AB+">
+                                                        AB+
+                                                    </option>
+                                                    <option value="AB-">
+                                                        AB-
+                                                    </option>
+                                                    <option value="O">
+                                                        O
+                                                    </option>
+                                                    <option value="O+">
+                                                        O+
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <label class="form-label"
+                                                   for="form3Example3">
+                                                DOB*
+                                            </label>
+                                            <div class="col-sm">
+                                                <input id="dob"
+                                                       type="date"
+                                                       class="form-control s_website_form_input"
+                                                       name="dob"
+                                                       required="1"/>
+                                            </div>
+                                        <label class="form-label"
+                                                   for="form3Example3">
+                                                Mobile*
+                                            </label>
+                                            <div class="col-sm">
+                                                <input id="mobile"
+                                                       type="text"
+                                                       class="form-control s_website_form_input"
+                                                       name="mobile"
+                                                       required="1"/>
+                                            </div>
+                                        <div class="form-outline mb-4">
+                                            <br/><br/>
+                                            <div class="form-group col-12 s_website_form_submit"
+                                                 data-name="Submit Button">
+                                                <div class="s_website_form_label"/>
+                                                <button type="submit"
+                                                        class="btn btn-primary btn-block mb-4">
+                                                    Create
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+</odoo>
+
+

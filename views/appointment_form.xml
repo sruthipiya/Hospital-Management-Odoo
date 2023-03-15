@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="online_appointment_form">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure oe_empty text-center">
+                <section class="s_website_form text-center" data-vcss="001" data-snippet="s_website_form">
+                    <div class="container"
+                         style="background-image: url('https://mobdev.app/wp-content/themes/mobdev/images/doctor-booking-app.jpg'); height: 400px; width:1000px; background-repeat: no-repeat; ">
+                    </div>
+                    <div class="card mx-4 mx-md-5 shadow-5-strong"
+                         style="margin-top: -100px; background: hsla(0, 0%, 100%, 0.8); backdrop-filter: blur(30px);">
+                        <div class="card-body py-5 px-md-5">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-lg-8">
+                                    <h2 class="fw-bold mb-5">Doctor
+                                        Appointment
+                                    </h2>
+                                    <form action="/appointment/submit/"
+                                          method="post"
+                                          enctype="multipart/form-data"
+                                          class="o_mark_required"
+                                          data-mark="*">
+                                        <div class="form-outline mb-4">
+                                            <input id="form3Example3"
+                                                   type="hidden"
+                                                   name="csrf_token"
+                                                   t-att-value="request.csrf_token()"
+                                                   class="form-control"/>
+                                            <label class="form-label"
+                                                   for="form3Example3">
+                                                Patient Card*
+                                            </label>
+                                            <div class="col-sm">
+                                                <select name="patient_name"
+                                                        t-attf-class="form-control s_website_form_input"
+                                                        required="1">
+                                                    <t t-foreach="patients or []"
+                                                       t-as="patient">
+                                                        <option t-att-value="patient.id">
+                                                            <t t-esc="patient.patient"/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label"
+                                                   for="form3Example3">
+                                                Doctor
+                                            </label>
+                                            <div class="col-sm">
+                                                <select name="doctor_name"
+                                                        t-attf-class="form-control s_website_form_input"
+                                                        required="1">
+                                                    <t t-foreach="doctors or []"
+                                                       t-as="doctor">
+                                                        <option t-att-value="doctor.id">
+                                                            <t t-esc="doctor.name"/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label"
+                                                   for="form3Example3">
+                                                Date
+                                            </label>
+                                            <div class="col-sm">
+                                                <input id="date"
+                                                           type="date"
+                                                           class="form-control s_website_form_input"
+                                                           name="date"
+                                                           required="1"/>
+                                            </div>
+                                            <br/><br/>
+                                            <div class="form-group col-12 s_website_form_submit"
+                                             data-name="Submit Button">
+                                            <div class="s_website_form_label"/>
+                                            <button type="submit"
+                                                    class="btn btn-primary btn-block mb-4">
+                                                Submit
+                                            </button>
+                                        </div>
+                                            <a href="/appointment/create/">Create Patient Card</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+</odoo>
+
+

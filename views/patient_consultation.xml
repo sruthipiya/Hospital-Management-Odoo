@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="doctor_details_view" model="ir.ui.view">
+        <field name="name">Is Doctor</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='department_id']" position="before">
+                <field name="doct"/>
+                <field name="fee" attrs="{'invisible':[('doct','!=', True)]}"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="seq_consultation" model="ir.sequence">
+        <field name="name">Consultation</field>
+        <field name="code">patient.consultation</field>
+        <field name="prefix">C</field>
+        <field name="padding">3</field>
+    </record>
+    <record id="patient_consultation_action" model="ir.actions.act_window">
+        <field name="name">Patient Consultation</field>
+        <field name="res_model">patient.consultation</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="patient_consultation_tree" model="ir.ui.view">
+        <field name="name">Consultation Details</field>
+        <field name="model">patient.consultation</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="card_details_id"/>
+                <field name="consultation_type"/>
+                <field name="consultation_doctor_id"/>
+                <field name="department_id"/>
+                <field name="consultation_date"/>
+            </tree>
+        </field>
+    </record>
+    <record id="patient_consultation_form" model="ir.ui.view">
+        <field name="name">Consultation Form</field>
+        <field name="model">patient.consultation</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="consultation" invisibility="1"/>
+                            <field name="consultation_doctor_id"/>
+                            <field name="card_details_id"/>
+                        </group>
+                        <group>
+                            <field name="consultation_type"/>
+                            <field name="department_id"/>
+                            <field name="consultation_date"/>
+                            <field name="token"/>
+                        </group>
+                        <notebook>
+                            <page string="Disease">
+                                <group>
+                                    <field name="disease_id"/>
+<!--                                    <field name="disease"/>-->
+                                </group>
+                            </page>
+                            <page string="Diagnose">
+                                <field name="consultation_description"/>
+                            </page>
+                            <page string="Treatment">
+                                <field name="consultation_details_ids">
+                                    <tree string="Treatment" editable="bottom">
+                                        <field name="medicine"/>
+                                        <field name="dose"/>
+                                        <field name="days"/>
+                                        <field name="description"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

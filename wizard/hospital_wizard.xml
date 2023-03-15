@@ -1,0 +1,37 @@
+<odoo>
+    <record id="hospital_wizard_view_form" model="ir.ui.view">
+        <field name="name">Hospital Wizard</field>
+        <field name="model">hospital.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="patient_card_id"/>
+                    <field name="doctor_id"/>
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                    <field name="disease_id"/>
+                    <field name="department_id"/>
+
+                </group>
+                <footer>
+                    <button name="action_generate" string="PDF REPORT"
+                            class="btn-secondary"
+                            type="object"/>
+                    <button name="action_generate_xlsx" string="XLSX REPORT"
+                            class="btn-secondary"
+                            type="object"/>
+                    <button string="Cancel" class="btn-secondary"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="hospital_wizard_action" model="ir.actions.act_window">
+        <field name="name">Patient Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="hospital_wizard_view_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

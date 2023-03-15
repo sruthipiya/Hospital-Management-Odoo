@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="patient_op_action" model="ir.actions.act_window">
+        <field name="name">Patient OP</field>
+        <field name="res_model">patient.op</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="token_hospital_patient" model="ir.sequence">
+        <field name="name">Token</field>
+        <field name="code">patient.op</field>
+        <field name="prefix">T-</field>
+        <field name="padding">3</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+
+    <record id="demo_cron" model="ir.cron">
+        <field name="name">Demo Cron token</field>
+        <field name="model_id" ref="model_patient_op"/>
+        <field name="state">code</field>
+        <field name="code">model.create()</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name='interval_number'>1</field>
+        <field name='interval_type'>days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+    </record>
+    <record id="hospital_patient_op_tree" model="ir.ui.view">
+        <field name="name">Patient OP List</field>
+        <field name="model">patient.op</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name_id"/>
+                <field name="age_op"/>
+                <field name="blood_op"/>
+                <field name="doctor_op_id"/>
+                <field name="date_today"/>
+            </tree>
+        </field>
+    </record>
+    <record id="hospital_patient_op_form" model="ir.ui.view">
+        <field name="name">Patient OP Form</field>
+        <field name="model">patient.op</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="flag" attrs="{'invisible':True}"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,op"/>
+
+                    <button name="button_in_progress" class="oe_highlight"
+                            states="draft" string="CONFIRM" type="object"
+                            help="Move Appointment to OP state"/>
+                    <button name="button_fee_payment" class="oe_highlight"
+                            string="FEE PAYMENT"
+                            type="object"
+                            attrs="{'invisible':[('flag','=', 1)]}"/>
+                </header>
+                <sheet>
+                    <div name="button_box" position="inside">
+                        <button class="oe_stat_button" type="object"
+                                name="get_payment" string="Invoice"
+                                attrs="{'invisible':[('flag','!=', 1)]}">
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="op_appointment" invisible="1"/>
+                            <field name="name_id"
+                                   attrs="{'readonly': [('op_appointment', '=', True)]}"/>
+                            <field name="age_op"/>
+                            <field name="gender_op"/>
+                            <field name="blood_op"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="amount" widget='monetary'/>
+                        </group>
+                        <group>
+                            <field name="doctor_op_id"/>
+                            <field name="date_today"/>
+                            <field name="op_id"/>
+                            <field name="doctor_token"/>
+                            <field name="token"
+                                   eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 12:00:00')"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

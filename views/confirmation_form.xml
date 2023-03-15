@@ -1,0 +1,18 @@
+<odoo>
+<template id="appointment_form_success" name="Appointment Form Successfully Submitted">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <section class="s_website_form text-center" data-vcss="001" data-snippet="s_website_form">
+
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="alert alert-success">
+                            Appointment created successfully.
+                        </div>
+                    </div>
+                </div>
+                </section>
+            </div>
+        </t>
+    </template>
+</odoo>

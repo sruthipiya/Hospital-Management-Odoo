@@ -1,0 +1,21 @@
+<odoo>
+    <template id="card_number_form"
+              name="Appointment Form Successfully Submitted">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <section class="s_website_form text-center" data-vcss="001" data-snippet="s_website_form">
+
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="alert alert-success">
+                            Your Card Number is
+                            <t t-esc="card_id"/>
+                        </div>
+                        <a href="/appointment">Create Appointment</a>
+                    </div>
+                </div>
+                </section>
+            </div>
+        </t>
+    </template>
+</odoo>

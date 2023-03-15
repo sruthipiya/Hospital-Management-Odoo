@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="action_report_hospital_management" model="ir.actions.report">
+        <field name="name">Patient Report</field>
+        <field name="model">hospital.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hospital_management.hospital_patient_report</field>
+        <field name="report_file">hospital_management.hospital_patient_report</field>
+    </record>
+    <template id="hospital_patient_report">
+        <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Medical Report</h2>
+                        <h4><t t-esc="sequence"/> <t t-esc="name"/></h4>
+                        <h5>Doctor : <t t-esc="doctor"/></h5>
+                        <h5>From : <t t-esc="from_date"/>   To : <t t-esc="to_date"/></h5>
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">SL No</th>
+                                    <th class="text-center">Patient Name</th>
+                                    <th class="text-center">Date</th>
+                                    <th class="text-center">Doctor</th>
+                                    <th class="text-center">Department</th>
+                                    <th class="text-center">Disease</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="data" t-as="item">
+                                    <tr>
+                                    <td>
+                                        <span t-esc="item_index+1"/>
+                                    </td>
+                                    <td><span t-esc="item['partner']"/></td>
+                                    <td><span t-esc="item['date_today']"/></td>
+                                    <td><span t-esc="item['employee']"/></td>
+                                    <td><span t-esc="item['department']"/></td>
+                                    <td><span t-esc="item['disease']"/></td>
+                                </tr>
+
+                                </t>
+
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </t>
+<!--            </t>-->
+        </t>
+    </template>
+
+
+</odoo>
